@@ -15,7 +15,6 @@ class Pigo:
         while stop() != 1:
             time.sleep(.1)
             print "Eek! I'm having trouble stopping."
-            stop()
 
 
 
