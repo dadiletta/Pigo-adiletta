@@ -3,12 +3,12 @@ import time
 
 class Pigo:
 
-    ######
-    ###### BASIC STATUS AND METHODS
-    ######
-
-    status = {'ismoving' : False, 'servo' : 90, 'leftspeed' : 175,
-              'rightspeed': 175}
+    #######
+    #######  BASIC STATUS AND METHODS
+    #######
+    
+    status = {"ismoving": False, "servo": 90, "leftspeed": 175,
+              "rightspeed": 175}
 
     def __init__(self):
         print "I'm a little robot car. beep beep."
@@ -25,13 +25,13 @@ class Pigo:
             time.sleep(.1)
             print "Sorry boss, can't seem to get moving."
 
-    ######
-    ###### COMPLEX METHODS
-    ######
+    #######
+    #######  ADVANCED METHODS
+    #######
 
-    ######
-    ###### MAIN APP STARTS HERE
-    ######
+#######
+#######  MAIN APP STARTS HERE
+#######
 
 tina = Pigo()
 tina.fwd()
