@@ -13,11 +13,13 @@ class Pigo:
     #######  BASIC STATUS AND METHODS
     #######
 
+    #status array holds lots of key information. access it using self.status["KEY"]
     status = {"ismoving": False, "servo": 90, "leftspeed": 175,
               "rightspeed": 175, 'dist': 100, "wentleft": True}
     vision = [None] * 180  #will hold our sensor data
     STEPPER = 5  #keeps track of how fast we count up in our servo sweeps
 
+    # this method means we're working with an instantiated object
     def __init__(self):
         print "I'm a little robot car. beep beep."
         self.checkDist()
@@ -25,7 +27,7 @@ class Pigo:
     def stop(self):
         self.status["ismoving"] = False
         print "Whoaaaa there."
-        for x in range(3):
+        for x in range(3):   #we send three so one of them will be heard by the MCU
             stop()
 
     def fwd(self):
@@ -46,7 +48,13 @@ class Pigo:
         for x in range(3):
             right_rot()
 
-    #Check if conditions are safe to continue operating
+    def leftrot(self):
+        self.status["ismoving"] = True
+        print "Rotating left!"
+        for x in range(3):
+            left_rot()
+
+    #Check if conditions are safe to continue operating and returns true/false
     def keepGoing(self):
         self.checkDist()
         if self.status['dist'] < STOP_DIST:
@@ -62,9 +70,6 @@ class Pigo:
         servo(90)
         self.status['dist'] = us_dist(15)
         print "I see something " + str(self.status['dist']) + "mm away."
-        if not self.keepGoing():
-            print "EMERGENCY STOP FROM THE CHECK DISTANCE METHOD!"
-            self.stop()
 
     #######
     #######  ADVANCED METHODS
@@ -87,13 +92,14 @@ class Pigo:
 
     def dance(self):
         print "I just want to DANCE!"
+        '''
         if self.keepGoing():
             self.circleRight()
             self.circleLeft()
             self.shuffle()
             self.servoShake()
             self.blink()
-
+        '''
 
     #checks to see if there is any 20 degree opening at all
     def findaPath(self):
@@ -145,6 +151,8 @@ class Pigo:
         print "I couldn't turn the direction I wanted. Goint to use angle " + str(option[0])
         if option[0]: #let's make sure there's something in there
             return option[0]
+        print "If I print this line I couldn't find an angle. How'd I get this far?"
+        return 90
 
 
     #takes an angle as its parameter an attempts to turn that way
